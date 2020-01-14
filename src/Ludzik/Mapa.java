@@ -5,22 +5,32 @@ import java.util.Scanner;
 
 public class Mapa {
     static String[][] plansza = new String[9][18];
+    static String[][] skarby = new String[9][18];
     static Scanner odczyt = new Scanner(System.in);
     static int wiersz = 0;
     static int kolumny = 0;
     static int pozycjax = 5;
     static int pozycjay = 5;
+    static int pozycjaZnajdzkiX = 0;
+    static int pozycjaZnajdzkiY = 0;
     static int pozycjaMobX = 0;
     static int pozycjaMobY = 0;
     static int wynik = 0;
+    static String skarb = "+";
+    static String gracz = "F";
+    static String mob = "&";
     static Random rand = new Random();
+
 
     public static void main(String[] args) {
         ramkaMapy();
         polaMapy();
+        randZnajdzka();
         randMob();
+        skarby();
         wyswietlanie();
         inputUsera();
+
     }
 
     private static void inputUsera() {
@@ -48,11 +58,13 @@ public class Mapa {
                     pozycjay = pozycjay + 1;
                 }
             }
-            if (plansza[pozycjax][pozycjay].contains("@")) {
+            if (plansza[pozycjax][pozycjay].contains("+")) {
                 wynik += 1;
                 System.out.println(wynik);
             }
-            plansza[pozycjax][pozycjay] = "F";
+            plansza[pozycjax][pozycjay] = gracz;
+
+            ruchMoba();
             wyswietlanie();
         }
     }
@@ -75,12 +87,11 @@ public class Mapa {
                 plansza[wiersz][kolumny] = " ";
             }
         }
-        plansza[pozycjax][pozycjay] = "F";
+        plansza[pozycjax][pozycjay] = gracz;
     }
 
     public static void wyswietlanie() {
         for (int wiersz = 0; wiersz < plansza.length; wiersz++) {
-
             for (int kolumna = 0; kolumna < plansza[wiersz].length; kolumna++) {
                 System.out.print(plansza[wiersz][kolumna]);
             }
@@ -88,11 +99,50 @@ public class Mapa {
         }
     }
 
+    public static void randZnajdzka() {
+        for (int ileZnajdzek = 0; ileZnajdzek < 3; ileZnajdzek++) {
+            pozycjaZnajdzkiX = rand.nextInt(skarby.length - 2) + 1;
+            pozycjaZnajdzkiY = rand.nextInt(skarby[0].length - 2) + 1;
+            skarby[pozycjaZnajdzkiX][pozycjaZnajdzkiY] = skarb;
+        }
+    }
+
     public static void randMob() {
-        for (int ileMob = 0; ileMob < 3; ileMob++) {
+        for (int ileMob = 0; ileMob < 1; ileMob++) {
             pozycjaMobX = rand.nextInt(plansza.length - 2) + 1;
             pozycjaMobY = rand.nextInt(plansza[0].length - 2) + 1;
-            plansza[pozycjaMobX][pozycjaMobY] = "@";
+            plansza[pozycjaMobX][pozycjaMobY] = mob;
+        }
+    }
+
+    public static void ruchMoba() {
+        boolean goraDol = rand.nextBoolean();
+        plansza[pozycjaMobX][pozycjaMobY] = " ";
+        if (goraDol) {
+            if (pozycjaMobX > pozycjax) {
+                pozycjaMobX -= 1;
+            }
+            if (pozycjaMobX < pozycjax) {
+                pozycjaMobX += 1;
+            }
+        } else {
+            if (pozycjaMobY > pozycjay) {
+                pozycjaMobY -= 1;
+            }
+            if (pozycjaMobY < pozycjay) {
+                pozycjaMobY += 1;
+            }
+        }
+        plansza[pozycjaMobX][pozycjaMobY] = mob;
+    }
+
+    public static void skarby() {
+        for (int wiersz = 0; wiersz < skarby.length; wiersz++) {
+            for (int kolumna = 0; kolumna < skarby[wiersz].length; kolumna++) {
+                if (skarby[wiersz][kolumna] != null && skarby[wiersz][kolumna].contains(skarb)) {
+                    plansza[wiersz][kolumna] = skarby[wiersz][kolumna];
+                }
+            }
         }
     }
 }
