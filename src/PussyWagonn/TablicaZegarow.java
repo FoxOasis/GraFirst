@@ -1,4 +1,4 @@
-package PussyWagon;
+package PussyWagonn;
 
 import java.util.Scanner;
 
