@@ -1,3 +1,5 @@
+package ZadaniaDomowe;
+
 public class Tablice2wymiary {
     public static void main(String[] args) {
         tabliczkaMnozenia();

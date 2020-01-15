@@ -1,3 +1,5 @@
+package ZadaniaDomowe;
+
 import java.util.Random;
 
 public class Zadanie2 {

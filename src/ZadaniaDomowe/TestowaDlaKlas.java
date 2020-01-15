@@ -1,3 +1,5 @@
+package ZadaniaDomowe;
+
 public class TestowaDlaKlas {
 
     static PalindromChecker pali = new PalindromChecker();

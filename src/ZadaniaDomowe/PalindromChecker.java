@@ -1,3 +1,5 @@
+package ZadaniaDomowe;
+
 public class PalindromChecker {
 
 
