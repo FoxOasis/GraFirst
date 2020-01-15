@@ -1,4 +1,4 @@
-package Warzon;
+package Warzonn;
 
 public class Warehouse {
     Product[] stock = new Product[10];

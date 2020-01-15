@@ -1,4 +1,4 @@
-package Warzon;
+package Warzonn;
 
 
 import java.util.Scanner;
